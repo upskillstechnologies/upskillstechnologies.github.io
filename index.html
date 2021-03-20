@@ -1041,14 +1041,14 @@
 				<div class="row">
 					<!-- Contact Form -->
 					<div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.4s">
-						<form class="form" method="post" action="https://formspree.io/f/moqyaqvv">
+						<form class="form" id="contact-to-upskills" method="post" action="https://formspree.io/f/moqyaqvv">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<input type="text" name="name" placeholder="Full Name" required="required">
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="form-group">
 										<input type="email" name="email" placeholder="Your Email" required="required">
 									</div>
@@ -1058,15 +1058,47 @@
 										<textarea name="message" rows="6" placeholder="Type Your Message Here" ></textarea>
 									</div>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<div class="form-group button">	
-										<button type="submit" class="button primary"><i class="fa fa-send"></i>Submit</button>
+										<button class="button primary"><i class="fa fa-send"></i>Submit</button>
 									</div>
 								</div>
+								
+								<div class="col-md-6">
+									<div class="form-group">	
+										<p id="upskills-form-status"></p>
+									</div>
+								</div>
+								
 							</div>
 						</form>
 					</div>
 					<!--/ End Contact Form -->
+					
+						<script>
+						    var form = document.getElementById("contact-to-upskills");
+
+						    async function handleSubmit(event) {
+						      event.preventDefault();
+						      var status = document.getElementById("upskills-form-status");
+						      var data = new FormData(event.target);
+						      fetch(event.target.action, {
+							method: form.method,
+							body: data,
+							headers: {
+							    'Accept': 'application/json'
+							}
+						      }).then(response => {
+							status.innerHTML = "Thanks for your submission!";
+							form.reset()
+						      }).catch(error => {
+							status.innerHTML = "Oops! There was a problem submitting your form"
+						      });
+						    }
+						    form.addEventListener("submit", handleSubmit)
+						</script>
+					
+					
 					<!-- Contact Address -->
 					<div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-delay="0.8s">
 						<div class="contact">
